@@ -24,7 +24,7 @@ class Map extends Component {
       <div>
         <GoogleMapShow
           data={this.props.data}
-          containerElement={<div style={{ height: `750px`, width: '1525px' }} />}
+          containerElement={<div style={{ height: `925px`, width: '1850px' }} />}
           mapElement={<div style={{ height: `100%` }} />}
         />
       </div>
