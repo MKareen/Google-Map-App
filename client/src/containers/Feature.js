@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SearchBar from './searchBar';
-import Map from './googleMap';
-import requireAuth from './requireAuth';
+import SearchBar from '../components/searchBar';
+import Map from '../components/googleMap';
+import requireAuth from '../components/auth/requireAuth';
 import {connect} from 'react-redux';
 
 class Feature extends Component {
