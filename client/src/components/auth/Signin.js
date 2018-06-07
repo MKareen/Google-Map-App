@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { signinUser } from '../../actions/api/auth';
 import * as actions from '../../actions';
 
 class Signin extends Component {
   onSubmit = formProps => {
-    this.props.signin(formProps, () => {
+    this.props.signinUser(formProps, () => {
       this.props.history.push('/feature');
     });
   };
@@ -45,11 +46,19 @@ class Signin extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return { signinUser: (formProps, callback) => dispatch({
+      type: 'AUTH_USER_SIGNIN',
+      payload: { formProps, callback }
+    })
+  }
+}
+
 function mapStateToProps(state) {
   return { errorMessage: state.auth.errorMessage };
 }
 
 export default compose(
-  connect(mapStateToProps, actions),
+  connect(mapStateToProps, mapDispatchToProps),
   reduxForm({ form: 'signin' })
 )(Signin);

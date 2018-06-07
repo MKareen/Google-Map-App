@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchEvents } from '../actions/eventBrites';
+import { getEvents } from '../actions/api/event';
 import Map from './googleMap';
 
 class SearchBar extends Component {
@@ -14,17 +15,21 @@ class SearchBar extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   };
 
-  componentDidMount() {
+  /*componentDidMount() {
     this.props.fetchEvents();
-  };
+  };*/
+
+  componentDidMount() {
+    this.props.getEvents()
+  }
 
   onInputChange (term) {
     this.setState({ term });
   };
 
-  async onFormSubmit(event) {
+  onFormSubmit(event) {
     event.preventDefault();
-    await this.props.fetchEvents(this.state.term);
+    this.props.getEvents(this.state.term);
   };
 
 
@@ -53,5 +58,15 @@ function mapStateToProps(state) {
    };
 }
 
-export default connect(mapStateToProps, {fetchEvents})(SearchBar);
+function mapDispatchToProps(dispatch) {
+  return {
+    getEvents: term => dispatch({ 
+      type: "EVENTS_FETCH_REQUESTED", 
+      payload: {term}
+    })
+   };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+
 
