@@ -1,5 +1,6 @@
 const Authentication = require('../controllers/authentication');
 const passportService = require('../services/passport');
+const { checkSchema } = require('express-validator/check');
 const passport = require('passport');
 
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -10,5 +11,5 @@ module.exports = (app) => {
     res.send({ hi: 'there' });
   });
   app.post('/signin', requireSignin, Authentication.signin);
-  app.post('/signup', Authentication.signup);
+  app.post('/signup', Authentication.validate, Authentication.signup);
 }

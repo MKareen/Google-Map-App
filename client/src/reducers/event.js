@@ -1,4 +1,4 @@
-import { FETCH_EVENTS } from '../actions/eventBrites';
+import { FETCH_EVENTS } from '../actions/types';
 
 const INITIAL_STATE = { all: [] };  
 

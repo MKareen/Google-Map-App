@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
 const cookieSession = require('cookie-session');
+const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const router = require('./routes/router');
@@ -10,6 +11,7 @@ const cors = require('cors');
 const keys = require('./config/keys');
 require('./models/googleUsers');
 require('./services/googlePassport');
+
 
 mongoose.connect('mongodb://localhost/auth');
 
@@ -24,6 +26,7 @@ app.use(passport.session());
 
 require('./routes/googleRouter')(app);
 
+app.use(expressValidator());
 app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json());
